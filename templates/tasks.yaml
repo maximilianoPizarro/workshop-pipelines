@@ -510,7 +510,7 @@ apiVersion: tekton.dev/v1
 kind: Task
 metadata:
   name: promote-to-quay
-  namespace: maximilianopizarro5-dev
+  namespace: {{ .Values.namespace }}
 spec:
   params:
     - name: source-image

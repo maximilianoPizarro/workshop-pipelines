@@ -54,7 +54,7 @@ spec:
                   - name: GIT_REPO
                     value: $(tt.params.gitrepositoryurl)                
                   - name: IMAGE_NAME
-                    value: 'image-registry.openshift-image-registry.svc:5000/maximilianopizarro5-dev/workshop-pipelines'
+                    value: {{ .Values.pipeline.sourceImage | replace ":latest" "" | quote }}
                   - name: PATH_CONTEXT
                     value: /app
                   - name: MAVEN_IMAGE

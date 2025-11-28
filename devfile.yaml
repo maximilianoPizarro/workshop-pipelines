@@ -66,19 +66,19 @@ commands:
       label: '2. Helm install workshop-pipelines'
       component: tools
       workingDir: ${PROJECT_SOURCE}
-      commandLine: 'helm install workshop-pipelines docs/workshop-pipelines-0.1.5.tgz -f values.yaml'
+      commandLine: 'helm install workshop-pipelines docs/workshop-pipelines-0.1.6.tgz -f values.yaml'    
+  - id: helm-upgrade-local
+    exec:
+      label: '4. Helm upgrade workshop-pipelines local'
+      component: tools
+      workingDir: ${PROJECT_SOURCE}
+      commandLine: 'helm upgrade workshop-pipelines . -f values.yaml'      
   - id: helm-uninstall
     exec:
       label: '3. Helm uninstall workshop-pipelines'
       component: tools
       workingDir: ${PROJECT_SOURCE}
-      commandLine: 'helm uninstall workshop-pipelines'      
-  - id: helm-install-package
-    exec:
-      label: '4. Helm install workshop-pipelines local'
-      component: tools
-      workingDir: ${PROJECT_SOURCE}
-      commandLine: 'helm install workshop-pipelines .'      
+      commandLine: 'helm uninstall workshop-pipelines'       
   - id: npm-install
     exec:
       label: 'a. Install Package of the application'

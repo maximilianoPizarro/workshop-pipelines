@@ -1,0 +1,50 @@
+INFO - 2025-09-18 17:58:45,879 - kai - MainThread - [logging.py:134 - init_logging()] - We have inited the logger: file_logging: DEBUG console_logging: DEBUG
+INFO - 2025-09-18 17:58:45,879 - kai.kai-rpc-logger - MainThread - [main.py:93 - main()] - using log config: log_level='DEBUG' stderr_log_level='TRACE' file_log_level='DEBUG' log_dir_path=WindowsPath('c:/Users/Max/workshop-pipelines/.vscode/konveyor-logs') log_file_name='kai-rpc-server.log'
+DEBUG - 2025-09-18 17:58:45,880 - kai.kai-rpc-logger - Thread-1 - [core.py:242 - run()] - Server thread started
+INFO - 2025-09-18 17:58:45,880 - kai.kai-rpc-logger - MainThread - [main.py:117 - main()] - Started kai RPC Server
+DEBUG - 2025-09-18 17:58:45,881 - kai.kai-rpc-logger - Thread-1 - [core.py:245 - run()] - Waiting for message
+DEBUG - 2025-09-18 17:58:45,882 - kai.jsonrpc - Thread-1 - [streams.py:109 - recv()] - Waiting for message
+INFO - 2025-09-18 17:58:45,894 - kai.kai.cache - Thread-1 - [cache.py:89 - __init__()] - Using cache dir: C:\Users\Max\AppData\Local\Temp\_MEI130042\data\llm_cache
+INFO - 2025-09-18 17:58:48,074 - kai.kai.llm_interfacing.callback.token_output_callback - Thread-1 - [token_output_callback.py:50 - on_chat_model_start()] - input tokens: 8
+DEBUG - 2025-09-18 17:58:49,617 - kai.kai-rpc-logger - Thread-1 - [core.py:245 - run()] - Waiting for message
+DEBUG - 2025-09-18 17:58:49,617 - kai.jsonrpc - Thread-1 - [streams.py:109 - recv()] - Waiting for message
+INFO - 2025-09-18 17:59:39,372 - kai - MainThread - [logging.py:134 - init_logging()] - We have inited the logger: file_logging: DEBUG console_logging: DEBUG
+INFO - 2025-09-18 17:59:39,372 - kai.kai-rpc-logger - MainThread - [main.py:93 - main()] - using log config: log_level='DEBUG' stderr_log_level='TRACE' file_log_level='DEBUG' log_dir_path=WindowsPath('c:/Users/Max/workshop-pipelines/.vscode/konveyor-logs') log_file_name='kai-rpc-server.log'
+DEBUG - 2025-09-18 17:59:39,372 - kai.kai-rpc-logger - Thread-1 - [core.py:242 - run()] - Server thread started
+INFO - 2025-09-18 17:59:39,372 - kai.kai-rpc-logger - MainThread - [main.py:117 - main()] - Started kai RPC Server
+DEBUG - 2025-09-18 17:59:39,373 - kai.kai-rpc-logger - Thread-1 - [core.py:245 - run()] - Waiting for message
+DEBUG - 2025-09-18 17:59:39,373 - kai.jsonrpc - Thread-1 - [streams.py:109 - recv()] - Waiting for message
+INFO - 2025-09-18 17:59:39,377 - kai.kai.cache - Thread-1 - [cache.py:89 - __init__()] - Using cache dir: C:\Users\Max\AppData\Local\Temp\_MEI187002\data\llm_cache
+INFO - 2025-09-18 17:59:40,253 - kai.kai.llm_interfacing.callback.token_output_callback - Thread-1 - [token_output_callback.py:50 - on_chat_model_start()] - input tokens: 8
+DEBUG - 2025-09-18 17:59:41,748 - kai.kai-rpc-logger - Thread-1 - [core.py:245 - run()] - Waiting for message
+DEBUG - 2025-09-18 17:59:41,748 - kai.jsonrpc - Thread-1 - [streams.py:109 - recv()] - Waiting for message
+INFO - 2025-09-18 17:59:57,869 - kai - MainThread - [logging.py:134 - init_logging()] - We have inited the logger: file_logging: DEBUG console_logging: DEBUG
+INFO - 2025-09-18 17:59:57,869 - kai.kai-rpc-logger - MainThread - [main.py:93 - main()] - using log config: log_level='DEBUG' stderr_log_level='TRACE' file_log_level='DEBUG' log_dir_path=WindowsPath('c:/Users/Max/workshop-pipelines/.vscode/konveyor-logs') log_file_name='kai-rpc-server.log'
+DEBUG - 2025-09-18 17:59:57,869 - kai.kai-rpc-logger - Thread-1 - [core.py:242 - run()] - Server thread started
+INFO - 2025-09-18 17:59:57,869 - kai.kai-rpc-logger - MainThread - [main.py:117 - main()] - Started kai RPC Server
+DEBUG - 2025-09-18 17:59:57,869 - kai.kai-rpc-logger - Thread-1 - [core.py:245 - run()] - Waiting for message
+DEBUG - 2025-09-18 17:59:57,870 - kai.jsonrpc - Thread-1 - [streams.py:109 - recv()] - Waiting for message
+INFO - 2025-09-18 17:59:57,873 - kai.kai.cache - Thread-1 - [cache.py:89 - __init__()] - Using cache dir: C:\Users\Max\AppData\Local\Temp\_MEI200962\data\llm_cache
+INFO - 2025-09-18 17:59:58,747 - kai.kai.llm_interfacing.callback.token_output_callback - Thread-1 - [token_output_callback.py:50 - on_chat_model_start()] - input tokens: 8
+DEBUG - 2025-09-18 18:00:00,453 - kai.kai-rpc-logger - Thread-1 - [core.py:245 - run()] - Waiting for message
+DEBUG - 2025-09-18 18:00:00,453 - kai.jsonrpc - Thread-1 - [streams.py:109 - recv()] - Waiting for message
+INFO - 2025-09-18 18:00:10,938 - kai - MainThread - [logging.py:134 - init_logging()] - We have inited the logger: file_logging: DEBUG console_logging: DEBUG
+INFO - 2025-09-18 18:00:10,938 - kai.kai-rpc-logger - MainThread - [main.py:93 - main()] - using log config: log_level='DEBUG' stderr_log_level='TRACE' file_log_level='DEBUG' log_dir_path=WindowsPath('c:/Users/Max/workshop-pipelines/.vscode/konveyor-logs') log_file_name='kai-rpc-server.log'
+DEBUG - 2025-09-18 18:00:10,939 - kai.kai-rpc-logger - Thread-1 - [core.py:242 - run()] - Server thread started
+INFO - 2025-09-18 18:00:10,939 - kai.kai-rpc-logger - MainThread - [main.py:117 - main()] - Started kai RPC Server
+DEBUG - 2025-09-18 18:00:10,939 - kai.kai-rpc-logger - Thread-1 - [core.py:245 - run()] - Waiting for message
+DEBUG - 2025-09-18 18:00:10,939 - kai.jsonrpc - Thread-1 - [streams.py:109 - recv()] - Waiting for message
+INFO - 2025-09-18 18:00:10,944 - kai.kai.cache - Thread-1 - [cache.py:89 - __init__()] - Using cache dir: C:\Users\Max\AppData\Local\Temp\_MEI114562\data\llm_cache
+INFO - 2025-09-18 18:00:11,868 - kai.kai.llm_interfacing.callback.token_output_callback - Thread-1 - [token_output_callback.py:50 - on_chat_model_start()] - input tokens: 8
+DEBUG - 2025-09-18 18:00:13,247 - kai.kai-rpc-logger - Thread-1 - [core.py:245 - run()] - Waiting for message
+DEBUG - 2025-09-18 18:00:13,248 - kai.jsonrpc - Thread-1 - [streams.py:109 - recv()] - Waiting for message
+INFO - 2025-09-18 18:01:31,129 - kai - MainThread - [logging.py:134 - init_logging()] - We have inited the logger: file_logging: DEBUG console_logging: DEBUG
+INFO - 2025-09-18 18:01:31,129 - kai.kai-rpc-logger - MainThread - [main.py:93 - main()] - using log config: log_level='DEBUG' stderr_log_level='TRACE' file_log_level='DEBUG' log_dir_path=WindowsPath('c:/Users/Max/workshop-pipelines/.vscode/konveyor-logs') log_file_name='kai-rpc-server.log'
+DEBUG - 2025-09-18 18:01:31,130 - kai.kai-rpc-logger - Thread-1 - [core.py:242 - run()] - Server thread started
+INFO - 2025-09-18 18:01:31,130 - kai.kai-rpc-logger - MainThread - [main.py:117 - main()] - Started kai RPC Server
+DEBUG - 2025-09-18 18:01:31,130 - kai.kai-rpc-logger - Thread-1 - [core.py:245 - run()] - Waiting for message
+DEBUG - 2025-09-18 18:01:31,130 - kai.jsonrpc - Thread-1 - [streams.py:109 - recv()] - Waiting for message
+INFO - 2025-09-18 18:01:31,134 - kai.kai.cache - Thread-1 - [cache.py:89 - __init__()] - Using cache dir: C:\Users\Max\AppData\Local\Temp\_MEI60122\data\llm_cache
+INFO - 2025-09-18 18:01:31,988 - kai.kai.llm_interfacing.callback.token_output_callback - Thread-1 - [token_output_callback.py:50 - on_chat_model_start()] - input tokens: 8
+DEBUG - 2025-09-18 18:01:33,507 - kai.kai-rpc-logger - Thread-1 - [core.py:245 - run()] - Waiting for message
+DEBUG - 2025-09-18 18:01:33,507 - kai.jsonrpc - Thread-1 - [streams.py:109 - recv()] - Waiting for message

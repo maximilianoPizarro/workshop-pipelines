@@ -4,12 +4,22 @@
 
 replicaCount: 1
 
+# Namespace configuration
+namespace: maximilianopizarro5-dev
+
 image:
 #  repository: image-registry.openshift-image-registry.svc:5000/maximilianopizarro5-dev/workshop-pipelines
   repository: quay.io/maximilianopizarro/workshop-pipelines
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
+
+# Pipeline configuration
+pipeline:
+  # Source image in OpenShift internal registry
+  sourceImage: image-registry.openshift-image-registry.svc:5000/maximilianopizarro5-dev/workshop-pipelines:latest
+  # Target image in external registry (e.g., Quay.io)
+  targetImage: quay.io/maximilianopizarro/workshop-pipelines
 
 imagePullSecrets: []
 nameOverride: ""
