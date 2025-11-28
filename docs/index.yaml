@@ -3,14 +3,14 @@ entries:
   workshop-pipelines:
   - apiVersion: v2
     appVersion: 0.0.1-SNAPSHOT
-    created: "2025-11-28T12:12:04.0989743-03:00"
+    created: "2025-11-28T14:55:17.8718328-03:00"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
       repository: https://charts.bitnami.com/bitnami
       version: 15.5.38
     description: A JHipster Workshop Pipelines Helm chart example for Kubernetes
-    digest: c5fe8b60d47f0d5bbf4675f72b6c2a0b17dace3a1fb7c5de57469fa590091905
+    digest: c0a61980afc81f7711a468b19c25bc3fba8eb60d94a5b72be8a7bf3e7583e8cc
     home: https://maximilianopizarro.github.io/workshop-pipelines/
     icon: https://raw.githubusercontent.com/maximilianoPizarro/workshop-pipelines/main/logo-rhel.png
     keywords:
@@ -29,7 +29,7 @@ entries:
     version: 0.1.6
   - apiVersion: v2
     appVersion: 0.0.1-SNAPSHOT
-    created: "2025-11-28T12:12:04.0944752-03:00"
+    created: "2025-11-28T14:55:17.8673251-03:00"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -55,7 +55,7 @@ entries:
     version: 0.1.5
   - apiVersion: v2
     appVersion: 0.0.1-SNAPSHOT
-    created: "2025-11-28T12:12:04.0899605-03:00"
+    created: "2025-11-28T14:55:17.8623249-03:00"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -79,4 +79,4 @@ entries:
     urls:
     - workshop-pipelines-0.1.4.tgz
     version: 0.1.4
-generated: "2025-11-28T12:12:04.0839335-03:00"
+generated: "2025-11-28T14:55:17.857818-03:00"

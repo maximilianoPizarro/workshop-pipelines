@@ -15,15 +15,7 @@ spec:
           value: latest
       taskRef:
         kind: Task
-        name: openshift-client
-    - name: promote-to-quay
-      taskRef:
-        name: promote-to-quay
-      params:
-        - name: source-image
-          value: {{ .Values.pipeline.sourceImage }}
-        - name: target-image
-          value: {{ .Values.pipeline.targetImage }}        
+        name: openshift-client        
   params:
     - default: 'https://github.com/maximilianoPizarro/workshop-pipelines'
       name: GIT_REPO
@@ -144,7 +136,7 @@ spec:
     - name: s2i-binary-build
       params:
         - name: SCRIPT
-          value: oc start-build {{ include "workshop-pipelines.fullname" . }} --from-file=$(workspaces.manifest-dir.path)/$(params.PATH_CONTEXT)/target/$(params.APP_JAR_VERSION)
+          value: oc start-build {{ include "workshop-pipelines.fullname" . }} --from-file=$(workspaces.manifest-dir.path)/$(params.PATH_CONTEXT)/target/$(params.APP_JAR_VERSION) --wait
         - name: VERSION
           value: latest
       runAfter:
@@ -155,6 +147,33 @@ spec:
       workspaces:
         - name: manifest-dir
           workspace: workspace
+    - name: promote-to-quay
+      taskRef:
+        name: promote-to-quay
+      params:
+        - name: source-image
+          {{- if contains "image-registry" .Values.pipeline.sourceImage }}
+          value: {{ .Values.pipeline.sourceImage }}
+          {{- else }}
+          {{- $sourceImage := .Values.pipeline.sourceImage }}
+          {{- if contains ":" $sourceImage }}
+          {{- $parts := splitList ":" $sourceImage }}
+          {{- $imageName := index $parts 0 }}
+          {{- $imageTag := index $parts 1 | default "latest" }}
+          value: image-registry.openshift-image-registry.svc:5000/{{ .Values.namespace }}/{{ $imageName }}:{{ $imageTag }}
+          {{- else }}
+          value: image-registry.openshift-image-registry.svc:5000/{{ .Values.namespace }}/{{ $sourceImage }}:latest
+          {{- end }}
+          {{- end }}
+        - name: target-image
+          value: {{ .Values.pipeline.targetImage }}
+      runAfter:
+        - s2i-binary-build
+      {{- if .Values.pipeline.promoteToQuay.retries }}
+      retries: {{ .Values.pipeline.promoteToQuay.retries }}
+      {{- else }}
+      retries: 3
+      {{- end }}
   workspaces:
     - name: workspace
     - name: credentials                           

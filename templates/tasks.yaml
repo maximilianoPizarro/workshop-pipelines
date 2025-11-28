@@ -525,7 +525,7 @@ spec:
           valueFrom:
             secretKeyRef:
               key: .dockerconfigjson
-              name: maximilianopizarro-workshoppipelines-pull-secret
+              name: {{ .Values.pipeline.quaySecret.name }}
       script: |
         #!/bin/sh
         set -e 
@@ -544,13 +544,27 @@ spec:
           --tls-verify=false \
           image-registry.openshift-image-registry.svc:5000
 
-        echo "Promoviendo imagen..."
+        echo "Verificando que la imagen fuente existe..."
         echo "Source: $(params.source-image)"
         echo "Target: $(params.target-image)"
 
-        # 3. Copiar imagen usando el archivo de configuración combinado
+        # 3. Verificar que la imagen fuente existe antes de copiar
+        if ! skopeo inspect \
+          --authfile /tekton/home/.docker/config.json \
+          --tls-verify=false \
+          docker://$(params.source-image) > /dev/null 2>&1; then
+          echo "ERROR: La imagen fuente no existe o no es accesible: $(params.source-image)"
+          echo "Por favor, verifica que la imagen haya sido construida correctamente en el paso anterior."
+          exit 1
+        fi
+
+        echo "Imagen fuente verificada. Promoviendo imagen a Quay.io..."
+
+        # 4. Copiar imagen usando el archivo de configuración combinado
         skopeo copy \
           --authfile /tekton/home/.docker/config.json \
           --src-tls-verify=false \
           docker://$(params.source-image) \
           docker://$(params.target-image)
+
+        echo "Imagen promovida exitosamente a: $(params.target-image)"

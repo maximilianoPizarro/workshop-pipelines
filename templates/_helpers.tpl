@@ -61,3 +61,10 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Generate docker config json for Quay.io secret
+*/}}
+{{- define "imagePullSecret" }}
+{{- printf "{\"auths\":{\"quay.io\":{\"username\":\"%s\",\"password\":\"%s\",\"email\":\"%s\",\"auth\":\"%s\"}}}" .Values.pipeline.quaySecret.username .Values.pipeline.quaySecret.password .Values.pipeline.quaySecret.email (printf "%s:%s" .Values.pipeline.quaySecret.username .Values.pipeline.quaySecret.password | b64enc) | b64enc }}
+{{- end }}

@@ -4,8 +4,12 @@
 
 replicaCount: 1
 
-# Namespace configuration
+# Namespace configuration  (must match the pattern: <redhat-username>-dev)
 namespace: maximilianopizarro5-dev
+
+route:
+  enabled: true  
+  host: ""
 
 image:
 #  repository: image-registry.openshift-image-registry.svc:5000/maximilianopizarro5-dev/workshop-pipelines
@@ -17,9 +21,35 @@ image:
 # Pipeline configuration
 pipeline:
   # Source image in OpenShift internal registry
-  sourceImage: image-registry.openshift-image-registry.svc:5000/maximilianopizarro5-dev/workshop-pipelines:latest
+  sourceImage: workshop-pipelines:latest
   # Target image in external registry (e.g., Quay.io)
   targetImage: quay.io/maximilianopizarro/workshop-pipelines
+  # Quay.io secret configuration for promote-to-quay task
+  quaySecret:
+    # Secret name (must match the pattern: <quay-username>-workshoppipelines-pull-secret)
+    name: maximilianopizarro-workshoppipelines-pull-secret
+    # Quay.io robot account username
+    username: "maximilianopizarro+workshoppipelines"
+    # Quay.io robot account password (base64 encoded)
+    password: ""
+    # Email for docker registry secret
+    email: ""
+  # Workspace PVC configuration
+  workspacePVC:
+    # Enable PVC creation for pipeline workspace (preselected)
+    enabled: true
+    # PVC name
+    name: workshop-pipelines-workspace
+    # Storage size (default: 4Gi)
+    size: 4Gi
+    # Storage class name (default: gp2)
+    storageClassName: gp2
+    # Access mode
+    accessMode: ReadWriteOnce
+  # Promote to Quay task configuration
+  promoteToQuay:
+    # Number of retries for the promote-to-quay task (default: 3)
+    retries: 3
 
 imagePullSecrets: []
 nameOverride: ""
@@ -67,9 +97,7 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
-route:
-  enabled: true  
-  host: workshop-pipelines-maximilianopizarro5-dev.apps.rm2.thpm.p1.openshiftapps.com
+
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious

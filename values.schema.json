@@ -1,0 +1,386 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Workshop Pipelines Helm Chart Values",
+  "type": "object",
+  "properties": {
+    "replicaCount": {
+      "type": "integer",
+      "default": 1,
+      "description": "Number of replicas for the deployment"
+    },
+    "namespace": {
+      "type": "string",
+      "default": "maximilianopizarro5-dev",
+      "description": "OpenShift namespace (must match the pattern: <redhat-username>-dev)"
+    },
+    "route": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable OpenShift Route"
+        },
+        "host": {
+          "type": "string",
+          "default": "",
+          "description": "Route hostname"
+        }
+      },
+      "required": ["enabled"]
+    },
+    "image": {
+      "type": "object",
+      "properties": {
+        "repository": {
+          "type": "string",
+          "default": "quay.io/maximilianopizarro/workshop-pipelines",
+          "description": "Image repository"
+        },
+        "pullPolicy": {
+          "type": "string",
+          "enum": ["Always", "IfNotPresent", "Never"],
+          "default": "IfNotPresent",
+          "description": "Image pull policy"
+        },
+        "tag": {
+          "type": "string",
+          "default": "latest",
+          "description": "Image tag (overrides the chart appVersion)"
+        }
+      },
+      "required": ["repository", "pullPolicy", "tag"]
+    },
+    "pipeline": {
+      "type": "object",
+      "properties": {
+        "sourceImage": {
+          "type": "string",
+          "default": "workshop-pipelines:latest",
+          "description": "Source image in OpenShift internal registry (can be short name like 'workshop-pipelines:latest' or full path)"
+        },
+        "targetImage": {
+          "type": "string",
+          "default": "quay.io/maximilianopizarro/workshop-pipelines",
+          "description": "Target image in external registry (e.g., Quay.io)"
+        },
+        "quaySecret": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "default": "maximilianopizarro-workshoppipelines-pull-secret",
+              "description": "Secret name (must match the pattern: <quay-username>-workshoppipelines-pull-secret)"
+            },
+            "username": {
+              "type": "string",
+              "default": "",
+              "description": "Quay.io robot account username"
+            },
+            "password": {
+              "type": "string",
+              "default": "",
+              "description": "Quay.io robot account password (base64 encoded)"
+            },
+            "email": {
+              "type": "string",
+              "default": "",
+              "description": "Email for docker registry secret"
+            }
+          },
+          "required": ["name"]
+        },
+        "workspacePVC": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable PVC creation for pipeline workspace (preselected)"
+            },
+            "name": {
+              "type": "string",
+              "default": "workshop-pipelines-workspace",
+              "description": "PVC name"
+            },
+            "size": {
+              "type": "string",
+              "default": "4Gi",
+              "description": "Storage size (default: 4Gi)"
+            },
+            "storageClassName": {
+              "type": "string",
+              "default": "gp2",
+              "description": "Storage class name (default: gp2)"
+            },
+            "accessMode": {
+              "type": "string",
+              "enum": ["ReadWriteOnce", "ReadOnlyMany", "ReadWriteMany"],
+              "default": "ReadWriteOnce",
+              "description": "Access mode"
+            }
+          },
+          "required": ["enabled", "name", "size", "accessMode"]
+        },
+        "promoteToQuay": {
+          "type": "object",
+          "properties": {
+            "retries": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 3,
+              "description": "Number of retries for the promote-to-quay task (default: 3)"
+            }
+          },
+          "required": ["retries"]
+        }
+      },
+      "required": ["sourceImage", "targetImage"]
+    },
+    "imagePullSecrets": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "default": [],
+      "description": "Image pull secrets"
+    },
+    "nameOverride": {
+      "type": "string",
+      "default": "",
+      "description": "Override the name of the chart"
+    },
+    "fullnameOverride": {
+      "type": "string",
+      "default": "",
+      "description": "Override the full name of the chart"
+    },
+    "serviceAccount": {
+      "type": "object",
+      "properties": {
+        "create": {
+          "type": "boolean",
+          "default": true,
+          "description": "Specifies whether a service account should be created"
+        },
+        "annotations": {
+          "type": "object",
+          "default": {},
+          "description": "Annotations to add to the service account"
+        },
+        "name": {
+          "type": "string",
+          "default": "",
+          "description": "The name of the service account to use. If not set and create is true, a name is generated using the fullname template"
+        }
+      },
+      "required": ["create"]
+    },
+    "podAnnotations": {
+      "type": "object",
+      "default": {},
+      "description": "Pod annotations"
+    },
+    "podSecurityContext": {
+      "type": "object",
+      "default": {},
+      "description": "Pod security context"
+    },
+    "securityContext": {
+      "type": "object",
+      "default": {},
+      "description": "Container security context"
+    },
+    "service": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["ClusterIP", "NodePort", "LoadBalancer", "ExternalName"],
+          "default": "ClusterIP",
+          "description": "Service type"
+        },
+        "port": {
+          "type": "integer",
+          "default": 8080,
+          "description": "Service port"
+        }
+      },
+      "required": ["type", "port"]
+    },
+    "ingress": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable ingress"
+        },
+        "className": {
+          "type": "string",
+          "default": "",
+          "description": "Ingress class name"
+        },
+        "annotations": {
+          "type": "object",
+          "default": {},
+          "description": "Ingress annotations"
+        },
+        "hosts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "host": {
+                "type": "string"
+              },
+              "paths": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "string"
+                    },
+                    "pathType": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tls": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "default": []
+        }
+      },
+      "required": ["enabled"]
+    },
+    "resources": {
+      "type": "object",
+      "default": {},
+      "description": "Resource limits and requests"
+    },
+    "autoscaling": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable autoscaling"
+        },
+        "minReplicas": {
+          "type": "integer",
+          "default": 1,
+          "description": "Minimum number of replicas"
+        },
+        "maxReplicas": {
+          "type": "integer",
+          "default": 100,
+          "description": "Maximum number of replicas"
+        },
+        "targetCPUUtilizationPercentage": {
+          "type": "integer",
+          "default": 80,
+          "description": "Target CPU utilization percentage"
+        }
+      },
+      "required": ["enabled"]
+    },
+    "nodeSelector": {
+      "type": "object",
+      "default": {},
+      "description": "Node selector"
+    },
+    "tolerations": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "default": [],
+      "description": "Tolerations"
+    },
+    "affinity": {
+      "type": "object",
+      "default": {},
+      "description": "Affinity rules"
+    },
+    "env": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Environment variables"
+    },
+    "postgresql": {
+      "type": "object",
+      "properties": {
+        "auth": {
+          "type": "object",
+          "properties": {
+            "database": {
+              "type": "string",
+              "default": "workshop-pipelines"
+            },
+            "username": {
+              "type": "string",
+              "default": "postgres"
+            },
+            "password": {
+              "type": "string",
+              "default": "postgres"
+            }
+          },
+          "required": ["database", "username", "password"]
+        },
+        "enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable PostgreSQL"
+        },
+        "image": {
+          "type": "object",
+          "properties": {
+            "registry": {
+              "type": "string",
+              "default": "ghcr.io"
+            },
+            "repository": {
+              "type": "string",
+              "default": "bat-bs/bitnami-pgvector"
+            },
+            "tag": {
+              "type": "string",
+              "default": "pg16"
+            }
+          },
+          "required": ["registry", "repository", "tag"]
+        },
+        "primary": {
+          "type": "object",
+          "properties": {
+            "initdb": {
+              "type": "object",
+              "properties": {
+                "scripts": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "required": ["enabled"]
+    }
+  },
+  "required": ["namespace", "pipeline"]
+}
+

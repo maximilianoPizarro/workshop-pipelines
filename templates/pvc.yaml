@@ -1,0 +1,18 @@
+{{- if .Values.pipeline.workspacePVC.enabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Values.pipeline.workspacePVC.name }}
+  labels:
+    {{- include "workshop-pipelines.labels" . | nindent 4 }}
+spec:
+  accessModes:
+    - {{ .Values.pipeline.workspacePVC.accessMode }}
+  {{- if .Values.pipeline.workspacePVC.storageClassName }}
+  storageClassName: {{ .Values.pipeline.workspacePVC.storageClassName }}
+  {{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.pipeline.workspacePVC.size }}
+{{- end }}
+

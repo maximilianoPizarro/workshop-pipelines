@@ -8,6 +8,18 @@ type: Opaque
 stringData:
   secretToken: MTIzNDU2Nw==
 ---
+{{- if and .Values.pipeline.quaySecret.username .Values.pipeline.quaySecret.password }}
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ .Values.pipeline.quaySecret.name }}
+  labels:
+    {{- include "workshop-pipelines.labels" . | nindent 4 }}
+type: kubernetes.io/dockerconfigjson
+data:
+  .dockerconfigjson: {{ include "imagePullSecret" . }}
+---
+{{- end }}
 apiVersion: triggers.tekton.dev/v1beta1
 kind: EventListener
 metadata:
@@ -54,7 +66,18 @@ spec:
                   - name: GIT_REPO
                     value: $(tt.params.gitrepositoryurl)                
                   - name: IMAGE_NAME
+                    {{- if contains "image-registry" .Values.pipeline.sourceImage }}
                     value: {{ .Values.pipeline.sourceImage | replace ":latest" "" | quote }}
+                    {{- else }}
+                    {{- $sourceImage := .Values.pipeline.sourceImage }}
+                    {{- if contains ":" $sourceImage }}
+                    {{- $parts := splitList ":" $sourceImage }}
+                    {{- $imageName := index $parts 0 }}
+                    value: {{ printf "image-registry.openshift-image-registry.svc:5000/%s/%s" .Values.namespace $imageName | quote }}
+                    {{- else }}
+                    value: {{ printf "image-registry.openshift-image-registry.svc:5000/%s/%s" .Values.namespace $sourceImage | quote }}
+                    {{- end }}
+                    {{- end }}
                   - name: PATH_CONTEXT
                     value: /app
                   - name: MAVEN_IMAGE
@@ -69,6 +92,10 @@ spec:
                   pipeline: 1h0m0s
                 workspaces:
                   - name: workspace
+                    {{- if .Values.pipeline.workspacePVC.enabled }}
+                    persistentVolumeClaim:
+                      claimName: {{ .Values.pipeline.workspacePVC.name }}
+                    {{- else }}
                     volumeClaimTemplate:
                       metadata:
                         creationTimestamp: null
@@ -80,6 +107,7 @@ spec:
                             storage: 4Gi
                         storageClassName: gp2
                         volumeMode: Filesystem
+                    {{- end }}
 ---
 kind: Route
 apiVersion: route.openshift.io/v1

@@ -10,18 +10,57 @@
 </p>
 
 <p align="left">
-<img src="https://github.com/maximilianoPizarro/workshop-pipelines/blob/main/app/ecommerce-architect.png?raw=true" width="900" title="Run On Openshift">
+<img src="https://maximilianopizarro.github.io/ocp-pipelines.png" width="900" title="Run On Openshift">  
+</p>
+
+
+<p align="left">
+<img src="https://maximilianopizarro.github.io/workshop-pipelines/ecommerce-architect.png" width="900" title="Run On Openshift">
 </p>
 
 # Getting Started: Fork and Personalize Your Environment
 
 Before starting the workshop, it is recommended to **fork this repository** into your own GitHub account. This allows you to work independently and save your progress.
 
-After forking, you must **replace all default values related to the OpenShift namespace** with the namespace assigned to your user in Developer Sandbox. By default, the configuration uses `maximilianopizarro5-dev` as the namespace. You should update this value in all relevant files using your editor, replacing it with your own namespace (usually based on your Red Hat account username).
+After forking, you must **configure the values in `values.yaml`** with your personal OpenShift namespace and registry information. By default, the configuration uses `maximilianopizarro5-dev` as the namespace. You should update these values in the `values.yaml` file.
 
 <p align="left">
-<img src="https://github.com/maximilianoPizarro/workshop-pipelines/blob/main/app/namespaces-dev.png?raw=true" width="900" title="Run On Openshift">
+<img src="https://maximilianopizarro.github.io/workshop-pipelines/namespaces-dev.png" width="900" title="Run On Openshift">
 </p>
+
+## Configuration in values.yaml
+
+Before installing the chart, you need to configure the following values in `values.yaml`:
+
+```yaml
+# Namespace configuration
+namespace: <YOUR-NAMESPACE>  # Replace with your OpenShift namespace (e.g., yourusername-dev)
+
+# Pipeline configuration
+pipeline:
+  # Source image in OpenShift internal registry
+  sourceImage: image-registry.openshift-image-registry.svc:5000/<YOUR-NAMESPACE>/workshop-pipelines:latest
+  # Target image in external registry (e.g., Quay.io)
+  targetImage: quay.io/<YOUR-QUAY-USERNAME>/workshop-pipelines
+
+# Route configuration
+route:
+  enabled: true  
+  host: workshop-pipelines-<YOUR-NAMESPACE>.apps.rm2.thpm.p1.openshiftapps.com
+```
+
+**Example configuration:**
+```yaml
+namespace: maximilianopizarro5-dev
+
+pipeline:
+  sourceImage: image-registry.openshift-image-registry.svc:5000/maximilianopizarro5-dev/workshop-pipelines:latest
+  targetImage: quay.io/maximilianopizarro/workshop-pipelines
+
+route:
+  enabled: true  
+  host: workshop-pipelines-maximilianopizarro5-dev.apps.rm2.thpm.p1.openshiftapps.com
+```
 
 This step is essential to ensure that all routes, URLs, and deployments work correctly in your personal Developer Sandbox environment.
 
@@ -67,7 +106,13 @@ The `devfile.yaml` defines a comprehensive set of tasks that streamline the depl
   Adds the `workshop-pipelines` Helm chart repository to your environment, making the chart available for installation.
 
 - **2. Helm install workshop-pipelines**  
-  Installs the main e-commerce application using the `workshop-pipelines` Helm chart.
+  Installs the main e-commerce application using the `workshop-pipelines` Helm chart from the packaged version (0.1.6) in the `docs/` directory.
+
+- **3. Helm uninstall workshop-pipelines**  
+  Uninstalls the `workshop-pipelines` Helm chart, removing the deployed application and its resources.
+
+- **4. Helm upgrade workshop-pipelines local**  
+  Upgrades the installed chart to your local development version. This allows you to test changes without uninstalling and reinstalling. **Note:** You can skip step 3 and go directly from step 2 to step 4 to upgrade without uninstalling.
 
 - **a. Install Package of the application**  
   Installs all required npm packages for the application located in the `/app` directory.
@@ -75,22 +120,16 @@ The `devfile.yaml` defines a comprehensive set of tasks that streamline the depl
 - **b. Start Ecommerce**  
   Starts the backend e-commerce application using Maven Wrapper (`./mvnw`).
 
-- **3. Helm add repo Developer Hub**  
+- **5. Helm add repo Developer Hub**  
   Adds the official OpenShift Helm charts repository, which includes the Red Hat Developer Hub chart.
 
-- **4. Helm install Developer Hub v1.7.0**  
+- **6. Helm install Developer Hub v1.7.0**  
   Installs the Red Hat Developer Hub using Helm, applying custom values from `values.yaml`.
 
 - **c. Helm package workshop-pipelines**  
   Packages the Helm chart for `workshop-pipelines`, builds dependencies, and updates the local Helm repository index.
 
-- **d. Helm install devspaces workshop-pipelinees**  
-  Installs the locally packaged `workshop-pipelines` chart from the `docs` directory using custom values.
-
-- **5. Helm uninstall workshop-pipelines**  
-  Uninstalls the `workshop-pipelines` Helm chart, removing the deployed application and its resources.
-
-- **6. Helm uninstall Developer Hub**  
+- **7. Helm uninstall Developer Hub**  
   Uninstalls the Red Hat Developer Hub from your environment.
 
 ### How to Use
@@ -103,7 +142,7 @@ The `devfile.yaml` defines a comprehensive set of tasks that streamline the depl
 Each task is modular and can be run independently or in sequence, allowing you to deploy, configure, and clean up resources as needed for your development
 
 <p align="left">  
-  <img src="https://github.com/maximilianoPizarro/workshop-pipelines/blob/main/app/tasks-helm-chart.png?raw=true" width="900" title="Run On Openshift">
+  <img src="https://maximilianopizarro.github.io/workshop-pipelines/tasks-helm-chart.png" width="900" title="Run On Openshift">
 </p>
 
 
@@ -114,13 +153,13 @@ Each task is modular and can be run independently or in sequence, allowing you t
 View the OpenShift Topology.
 
 <p align="left">  
-<img src="https://github.com/maximilianoPizarro/workshop-pipelines/blob/main/app/workshop-pipelines-topology.PNG?raw=true" width="900" title="Run On Openshift">
+<img src="https://maximilianopizarro.github.io/workshop-pipelines/workshop-pipelines-topology.PNG" width="900" title="Run On Openshift">
 </p>
 
 Access the Web App Home Page.
 
 <p align="left">  
-<img src="https://github.com/maximilianoPizarro/workshop-pipelines/blob/main/app/workshop-pipelines-home.PNG?raw=true" width="900" title="Run On Openshift">  
+<img src="https://maximilianopizarro.github.io/workshop-pipelines/workshop-pipelines-home.PNG" width="900" title="Run On Openshift">  
 </p>
 
 Get the Web App route with the following command:
@@ -141,7 +180,7 @@ workshop-pipelines   workshop-pipelines-maximilianopizarro5-dev.apps.rm2.thpm.p1
 Access the WebHook settings and configure the `ci-github` route.
 
 <p align="left">
-<img src="https://github.com/maximilianoPizarro/workshop-pipelines/blob/main/app/webhook-github.PNG?raw=true" width="900" title="Run On Openshift">  
+<img src="https://maximilianopizarro.github.io/workshop-pipelines/webhook-github.PNG" width="900" title="Run On Openshift">  
 </p>
 
 ```bash
@@ -155,26 +194,147 @@ NAME        HOST/PORT                                                          P
 ci-github   ci-github-mpizarro-dev.apps.rm2.thpm.p1.openshiftapps.com          el-ci-github   http-listener   edge/Redirect   None
 ```
 
+# Configure Quay.io Repository and Robot Account for Image Promotion
+
+The pipeline includes a `promote-to-quay` task that copies images from the OpenShift internal registry to Quay.io. To enable this functionality, you need to:
+
+1. Create a repository in Quay.io
+2. Create a robot account with write permissions
+3. Configure the secret in your OpenShift namespace
+4. Update the `values.yaml` file with your credentials
+
+## Step 1: Create a Repository in Quay.io
+
+1. Log in to [Quay.io](https://quay.io) with your account
+2. Click on **Create New Repository** (or navigate to your organization/user account)
+3. Fill in the repository details:
+   - **Repository Name**: `workshop-pipelines` (or your preferred name)
+   - **Visibility**: Choose **Public** or **Private** based on your needs
+   - **Description**: Optional description for your repository
+4. Click **Create Public Repository** (or **Create Private Repository**)
+
+<p align="left">
+<img src="https://maximilianopizarro.github.io/workshop-pipelines/quay-1.png" width="900" title="Create Quay.io Repository">  
+</p>
+
+## Step 2: Create a Robot Account in Quay.io
+
+A robot account is a special type of account designed for automated access to Quay.io repositories. It's more secure than using your personal credentials.
+
+1. In your Quay.io account, navigate to **Account Settings** (click on your username in the top right)
+2. Go to **Robot Accounts** in the left sidebar
+3. Click **Create Robot Account**
+4. Enter a name for the robot account (e.g., `workshop-pipelines`)
+5. Click **Create Robot Account**
+
+<p align="left">
+<img src="https://maximilianopizarro.github.io/workshop-pipelines/quay-2.png" width="900" title="Create Robot Account">  
+</p>
+
+## Step 3: Grant Permissions to the Robot Account
+
+1. After creating the robot account, you'll see it listed under **Robot Accounts**
+2. Click on the robot account name to view its details
+3. In the **Repository Permissions** section, click **Add Permission**
+4. Select your repository (`workshop-pipelines`)
+5. Set the permission level to **Write** (this allows the robot to push images)
+6. Click **Add Permission**
+
+<p align="left">
+<img src="https://maximilianopizarro.github.io/workshop-pipelines/quay-3.png" width="900" title="Grant Robot Account Permissions">  
+</p>
+
+## Step 4: Get Robot Account Credentials
+
+1. On the robot account details page, you'll see the credentials:
+   - **Robot Username**: This will be in the format `<your-username>+<robot-name>` (e.g., `maximilianopizarro+workshoppipelines`)
+   - **Robot Password**: Click **Regenerate Token** if needed, then copy the password
+2. **Important**: Save these credentials securely. You'll need them for the next step.
+
+## Step 5: Configure values.yaml
+
+Update your `values.yaml` file with the Quay.io configuration:
+
+```yaml
+pipeline:
+  # Target image in external registry (e.g., Quay.io)
+  targetImage: quay.io/<YOUR-QUAY-USERNAME>/workshop-pipelines
+  
+  # Quay.io secret configuration for promote-to-quay task
+  quaySecret:
+    # Secret name (must match the pattern: <quay-username>-workshoppipelines-pull-secret)
+    name: <YOUR-QUAY-USERNAME>-workshoppipelines-pull-secret
+    # Quay.io robot account username (format: username+robotname)
+    username: "<YOUR-USERNAME>+<ROBOT-NAME>"
+    # Quay.io robot account password (from Step 4)
+    password: "<ROBOT-ACCOUNT-PASSWORD>"
+    # Email for docker registry secret
+    email: "<YOUR-EMAIL>"
+```
+
+**Example:**
+```yaml
+pipeline:
+  targetImage: quay.io/maximilianopizarro/workshop-pipelines
+  
+  quaySecret:
+    name: maximilianopizarro-workshoppipelines-pull-secret
+    username: "maximilianopizarro+workshoppipelines"
+    password: "PASSWORD-ROBOT"
+    email: "maximiliano.pizarro.5@gmail.com"
+```
+
+## Step 6: Install or Upgrade the Chart
+
+When you install or upgrade the Helm chart, it will automatically create the Docker registry secret in OpenShift using the credentials from `values.yaml`:
+
+```bash
+helm install workshop-pipelines . -f values.yaml
+```
+
+or
+
+```bash
+helm upgrade workshop-pipelines . -f values.yaml
+```
+
+The secret will be created automatically if `pipeline.quaySecret.username` and `pipeline.quaySecret.password` are provided in `values.yaml`.
+
+## Step 7: Verify Configuration
+
+After installing the chart, verify that the secret was created:
+
+```bash
+oc get secret <YOUR-QUAY-USERNAME>-workshoppipelines-pull-secret -n <YOUR-NAMESPACE>
+```
+
+The `promote-to-quay` task in the pipeline will automatically:
+1. Authenticate with Quay.io using the robot account credentials from the secret
+2. Authenticate with the OpenShift internal registry using the service account token
+3. Copy the image from the internal registry to Quay.io after a successful build
+
+The task runs after the `s2i-binary-build` task completes successfully, ensuring images are only promoted when the build succeeds.
+
 # Install Developer Hub with Helm CLI (Optional)
 
 See the pipelines.
 <p align="left">
-<img src="https://github.com/maximilianoPizarro/workshop-pipelines/blob/main/app/developer-hub-ecommerce.PNG?raw=true" width="900" title="Run On Openshift">  
+<img src="https://maximilianopizarro.github.io/workshop-pipelines/developer-hub-ecommerce.PNG" width="900" title="Run On Openshift">  
 </p>
 
 Review the documentation.
 <p align="left">
-<img src="https://github.com/maximilianoPizarro/workshop-pipelines/blob/main/app/developer-hub-ecommerce-documentation.PNG?raw=true" width="900" title="Run On Openshift">  
+<img src="https://maximilianopizarro.github.io/workshop-pipelines/developer-hub-ecommerce-documentation.PNG" width="900" title="Run On Openshift">  
 </p>
 
 See the App Topology.
 <p align="left">
-<img src="https://github.com/maximilianoPizarro/workshop-pipelines/blob/main/app/developer-hub-ecommerce-kubernetes.PNG?raw=true" width="900" title="Run On Openshift">  
+<img src="https://maximilianopizarro.github.io/workshop-pipelines/developer-hub-ecommerce-kubernetes.PNG" width="900" title="Run On Openshift">  
 </p>
 
 See the Web App Logs.
 <p align="left">
-<img src="https://github.com/maximilianoPizarro/workshop-pipelines/blob/main/app/developer-hub-ecommerce-kubernetes-logs.PNG?raw=true" width="900" title="Run On Openshift">  
+<img src="https://maximilianopizarro.github.io/workshop-pipelines/developer-hub-ecommerce-kubernetes-logs.PNG" width="900" title="Run On Openshift">  
 </p>
 
 
@@ -258,7 +418,7 @@ helm install workshop-pipelines workshop-pipelines/workshop-pipelines --version 
 
 Example:
 ```bash
-helm install workshop-pipelines workshop-pipelines/workshop-pipelines --version 0.1.5
+helm install workshop-pipelines workshop-pipelines/workshop-pipelines --version 0.1.6
 ```
 
 ## Uninstall Chart
