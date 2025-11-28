@@ -10,7 +10,7 @@
 </p>
 
 <p align="left">
-<img src="https://maximilianopizarro.github.io/ocp-pipelines.png" width="900" title="Run On Openshift">  
+<img src="https://maximilianopizarro.github.io/workshop-pipelines/ocp-pipelines.png" width="900" title="Run On Openshift">  
 </p>
 
 
@@ -24,9 +24,6 @@ Before starting the workshop, it is recommended to **fork this repository** into
 
 After forking, you must **configure the values in `values.yaml`** with your personal OpenShift namespace and registry information. By default, the configuration uses `maximilianopizarro5-dev` as the namespace. You should update these values in the `values.yaml` file.
 
-<p align="left">
-<img src="https://maximilianopizarro.github.io/workshop-pipelines/namespaces-dev.png" width="900" title="Run On Openshift">
-</p>
 
 ## Configuration in values.yaml
 
@@ -141,9 +138,6 @@ The `devfile.yaml` defines a comprehensive set of tasks that streamline the depl
 
 Each task is modular and can be run independently or in sequence, allowing you to deploy, configure, and clean up resources as needed for your development
 
-<p align="left">  
-  <img src="https://maximilianopizarro.github.io/workshop-pipelines/tasks-helm-chart.png" width="900" title="Run On Openshift">
-</p>
 
 
 ## Open OpenShift Console
