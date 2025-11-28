@@ -60,13 +60,25 @@ commands:
       label: '1. Helm repo add'
       component: tools
       workingDir: ${PROJECT_SOURCE}
-      commandLine: 'helm repo add workshop-pipelines https://maximilianopizarro.github.io/workshop-pipelines/'   
-  - id: helm-install
+      commandLine: 'helm repo add workshop-pipelines https://maximilianopizarro.github.io/workshop-pipelines/'  
+  - id: helm-install-devspace
     exec:
       label: '2. Helm install workshop-pipelines'
       component: tools
       workingDir: ${PROJECT_SOURCE}
-      commandLine: 'helm install workshop-pipelines workshop-pipelines/workshop-pipelines --version 0.1.5'     
+      commandLine: 'helm install workshop-pipelines docs/workshop-pipelines-0.1.5.tgz -f values.yaml'
+  - id: helm-uninstall
+    exec:
+      label: '3. Helm uninstall workshop-pipelines'
+      component: tools
+      workingDir: ${PROJECT_SOURCE}
+      commandLine: 'helm uninstall workshop-pipelines'      
+  - id: helm-install-package
+    exec:
+      label: '4. Helm install workshop-pipelines local'
+      component: tools
+      workingDir: ${PROJECT_SOURCE}
+      commandLine: 'helm install workshop-pipelines .'      
   - id: npm-install
     exec:
       label: 'a. Install Package of the application'
@@ -87,13 +99,13 @@ commands:
         isDefault: false            
   - id: helm-add-repo-developerhub
     exec:
-      label: '3. Helm add repo Developer Hub'
+      label: '5. Helm add repo Developer Hub'
       component: tools
       workingDir: ${PROJECT_SOURCE}
       commandLine: 'helm repo add openshift-helm-charts https://charts.openshift.io/'      
   - id: helm-install-developerhub
     exec:
-      label: '4. Helm install Developer Hub v1.7.0'
+      label: '6. Helm install Developer Hub v1.7.0'
       component: tools
       workingDir: ${PROJECT_SOURCE}/developer-hub
       commandLine: 'helm install redhat-developer-hub openshift-helm-charts/redhat-developer-hub -f values.yaml --version 1.7.0'
@@ -103,21 +115,9 @@ commands:
       component: tools
       workingDir: ${PROJECT_SOURCE}
       commandLine: 'helm repo add postgres https://charts.bitnami.com/bitnami && helm dependency build && helm package -u . -d docs && helm repo index docs/'
-  - id: helm-install-devspaces
-    exec:
-      label: 'd. Helm install devspaces workshop-pipelinees'
-      component: tools
-      workingDir: ${PROJECT_SOURCE}
-      commandLine: 'helm install workshop-pipelines docs/workshop-pipelines-0.1.5.tgz -f values.yaml'           
-  - id: helm-uninstall
-    exec:
-      label: '5. Helm uninstall workshop-pipelines'
-      component: tools
-      workingDir: ${PROJECT_SOURCE}
-      commandLine: 'helm uninstall workshop-pipelines'
   - id: helm-uninstall-developerhub
     exec:
-      label: '6. Helm uninstall Developer Hub'
+      label: '7. Helm uninstall Developer Hub'
       component: tools
       workingDir: ${PROJECT_SOURCE}
       commandLine: 'helm uninstall redhat-developer-hub'                     

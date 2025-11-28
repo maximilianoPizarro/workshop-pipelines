@@ -505,3 +505,52 @@ spec:
       workingDir: $(workspaces.source.path)/$(params.PATH_CONTEXT)
   workspaces:
     - name: source
+---
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: promote-to-quay
+  namespace: maximilianopizarro5-dev
+spec:
+  params:
+    - name: source-image
+      type: string
+    - name: target-image
+      type: string
+  steps:
+    - name: promote-image
+      image: quay.io/skopeo/stable
+      env:
+        - name: QUAY_AUTH
+          valueFrom:
+            secretKeyRef:
+              key: .dockerconfigjson
+              name: maximilianopizarro-workshoppipelines-pull-secret
+      script: |
+        #!/bin/sh
+        set -e 
+
+        # 1. Preparar directorio y cargar credenciales de Quay (Target)
+        mkdir -p /tekton/home/.docker
+        echo "${QUAY_AUTH}" > /tekton/home/.docker/config.json
+
+        # 2. Iniciar sesión en el Registro Interno de OpenShift (Source)
+        # Usamos el token que Kubernetes monta automáticamente en el pod.
+        echo "Autenticando en registro interno..."
+        skopeo login \
+          --authfile /tekton/home/.docker/config.json \
+          --username serviceaccount \
+          --password $(cat /var/run/secrets/kubernetes.io/serviceaccount/token) \
+          --tls-verify=false \
+          image-registry.openshift-image-registry.svc:5000
+
+        echo "Promoviendo imagen..."
+        echo "Source: $(params.source-image)"
+        echo "Target: $(params.target-image)"
+
+        # 3. Copiar imagen usando el archivo de configuración combinado
+        skopeo copy \
+          --authfile /tekton/home/.docker/config.json \
+          --src-tls-verify=false \
+          docker://$(params.source-image) \
+          docker://$(params.target-image)
