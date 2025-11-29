@@ -5,7 +5,7 @@
 replicaCount: 1
 
 # Namespace configuration  (must match the pattern: <redhat-username>-dev)
-namespace: maximilianopizarro5-dev
+namespace: ""
 
 route:
   enabled: true  
@@ -29,7 +29,7 @@ pipeline:
     # Secret name (must match the pattern: <quay-username>-workshoppipelines-pull-secret)
     name: maximilianopizarro-workshoppipelines-pull-secret
     # Quay.io robot account username
-    username: "maximilianopizarro+workshoppipelines"
+    username: ""
     # Quay.io robot account password (base64 encoded)
     password: ""
     # Email for docker registry secret
@@ -88,7 +88,7 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: workshop-pipelines-maximilianopizarro5-dev.apps.rm2.thpm.p1.openshiftapps.com
+    - host: ""
       paths:
         - path: /
           pathType: ImplementationSpecific
