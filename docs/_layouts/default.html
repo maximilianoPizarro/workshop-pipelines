@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+    <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+    
+    <!-- Red Hat Design System CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/@redhat/ux-red-hat-design-system@4.0.0/dist/css/rhds.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:wght@400;500;600;700&family=Red+Hat+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Custom styles -->
+    <style>
+        :root {
+            --rh-color-brand-red-on-white: #CC0000;
+            --rh-color-brand-red-on-dark: #EE0000;
+        }
+        
+        body {
+            font-family: 'Red Hat Text', 'Overpass', 'Overpass', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #151515;
+            background-color: #ffffff;
+        }
+        
+        .rh-site-header {
+            background-color: #151515;
+            color: #ffffff;
+            padding: 1rem 0;
+            border-bottom: 3px solid var(--rh-color-brand-red-on-white);
+        }
+        
+        .rh-site-header__container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .rh-site-header__logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: #ffffff;
+        }
+        
+        .rh-site-header__logo svg {
+            flex-shrink: 0;
+        }
+        
+        .rh-site-header__title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 0;
+            font-family: 'Red Hat Text', sans-serif;
+        }
+        
+        .rh-main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .rh-hero {
+            background: linear-gradient(135deg, #151515 0%, #2d2d2d 100%);
+            color: #ffffff;
+            padding: 4rem 2rem;
+            margin: -2rem -1rem 3rem -1rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .rh-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .rh-hero > * {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .rh-hero__title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 0 0 1rem 0;
+            font-family: 'Red Hat Text', sans-serif;
+        }
+        
+        .rh-hero__subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin: 0;
+            font-family: 'Red Hat Text', sans-serif;
+        }
+        
+        .rh-content {
+            background: #ffffff;
+        }
+        
+        .rh-content h1 {
+            color: var(--rh-color-brand-red-on-white);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 3px solid var(--rh-color-brand-red-on-white);
+            padding-bottom: 0.5rem;
+            font-family: 'Red Hat Text', sans-serif;
+        }
+        
+        .rh-content h2 {
+            color: #151515;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-family: 'Red Hat Text', sans-serif;
+        }
+        
+        .rh-content h3 {
+            color: #151515;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            font-family: 'Red Hat Text', sans-serif;
+        }
+        
+        .rh-content code {
+            background-color: #f5f5f5;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-family: 'Red Hat Mono', 'Overpass Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        .rh-content pre {
+            background-color: #151515;
+            color: #ffffff;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            border-left: 4px solid var(--rh-color-brand-red-on-white);
+        }
+        
+        .rh-content pre code {
+            background-color: transparent;
+            color: #ffffff;
+            padding: 0;
+        }
+        
+        .rh-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            margin: 1.5rem 0;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .rh-content img[alt*="badge"] {
+            box-shadow: none;
+            border: none;
+            margin: 0.25rem;
+        }
+        
+        .rh-content a {
+            color: var(--rh-color-brand-red-on-white);
+            text-decoration: none;
+        }
+        
+        .rh-content a:hover {
+            text-decoration: underline;
+        }
+        
+        .rh-badge-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 2rem 0;
+            justify-content: center;
+        }
+        
+        .rh-badge-group img {
+            margin: 0;
+            box-shadow: none;
+            border: none;
+        }
+        
+        .rh-card {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: box-shadow 0.2s ease;
+        }
+        
+        .rh-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+        }
+        
+        .rh-card__title {
+            color: var(--rh-color-brand-red-on-white);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 0 0 0.5rem 0;
+            font-family: 'Red Hat Text', sans-serif;
+        }
+        
+        .rh-content ul, .rh-content ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+        
+        .rh-content li {
+            margin: 0.5rem 0;
+        }
+        
+        .rh-content blockquote {
+            border-left: 4px solid var(--rh-color-brand-red-on-white);
+            padding-left: 1rem;
+            margin: 1.5rem 0;
+            color: #666;
+            font-style: italic;
+        }
+        
+        .rh-footer {
+            background-color: #151515;
+            color: #ffffff;
+            padding: 2rem 1rem;
+            margin-top: 4rem;
+            text-align: center;
+        }
+        
+        .rh-footer__links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+        
+        .rh-footer__links a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+        
+        .rh-footer__links a:hover {
+            color: var(--rh-color-brand-red-on-white);
+        }
+        
+        @media (max-width: 768px) {
+            .rh-hero__title {
+                font-size: 2rem;
+            }
+            
+            .rh-main {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="rh-site-header">
+        <div class="rh-site-header__container">
+            <a href="{{ site.baseurl }}/" class="rh-site-header__logo">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16 0C7.163 0 0 7.163 0 16s7.163 16 16 16 16-7.163 16-16S24.837 0 16 0zm0 30C8.268 30 2 23.732 2 16S8.268 2 16 2s14 6.268 14 14-6.268 14-14 14z" fill="#EE0000"/>
+                    <path d="M16 8c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zm0 14c-3.314 0-6-2.686-6-6s2.686-6 6-6 6 2.686 6 6-2.686 6-6 6z" fill="#EE0000"/>
+                </svg>
+                <h1 class="rh-site-header__title">{{ site.title }}</h1>
+            </a>
+        </div>
+    </header>
+
+    <main class="rh-main">
+        {% if page.hero %}
+        <section class="rh-hero">
+            <h1 class="rh-hero__title">{{ page.hero.title | default: page.title }}</h1>
+            {% if page.hero.subtitle %}
+            <p class="rh-hero__subtitle">{{ page.hero.subtitle }}</p>
+            {% endif %}
+        </section>
+        {% endif %}
+
+        <div class="rh-content">
+            {{ content }}
+        </div>
+    </main>
+
+    <footer class="rh-footer">
+        <div class="rh-footer__links">
+            <a href="https://github.com/maximilianoPizarro/workshop-pipelines">GitHub Repository</a>
+            <a href="https://artifacthub.io/packages/search?repo=workshop-pipelines">Artifact Hub</a>
+            <a href="https://developers.redhat.com/developer-sandbox">Developer Sandbox</a>
+        </div>
+        <p>&copy; {{ 'now' | date: "%Y" }} Red Hat, Inc. | Built with Red Hat Design System</p>
+    </footer>
+
+    <!-- Red Hat Design System JS -->
+    <script src="https://unpkg.com/@redhat/ux-red-hat-design-system@4.0.0/dist/js/rhds.min.js"></script>
+</body>
+</html>
+

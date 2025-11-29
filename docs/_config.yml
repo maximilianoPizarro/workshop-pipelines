@@ -1,0 +1,36 @@
+title: Workshop OpenShift Pipelines
+description: WorkShop OpenShift Pipelines with Helm Charts Example on Red Hat OpenShift
+baseurl: "/workshop-pipelines"
+url: "https://maximilianopizarro.github.io"
+
+# Jekyll configuration
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    block:
+      line_numbers: false
+
+# GitHub Pages compatible plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+# Exclude files
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .git
+  - .gitignore
+  - README.md
+  - *.tgz
+  - index.yaml
+
+# Red Hat Design System configuration
+redhat_design_system:
+  version: "4.0.0"
+  cdn: "https://unpkg.com/@redhat/ux-red-hat-design-system@4.0.0/dist"
+

@@ -1,22 +1,24 @@
-# WorkShop OpenShift Pipelines with Helm Charts Example on Red Hat OpenShift
+---
+layout: default
+title: Workshop OpenShift Pipelines
+description: WorkShop OpenShift Pipelines with Helm Charts Example on Red Hat OpenShift
+hero:
+  title: Workshop OpenShift Pipelines
+  subtitle: Helm Charts Example on Red Hat OpenShift
+---
 
-<p align="left">
+<div class="rh-badge-group">
 <img src="https://img.shields.io/badge/redhat-CC0000?style=for-the-badge&logo=redhat&logoColor=white" alt="Redhat">
 <img src="https://img.shields.io/badge/kubernetes-%23326ce5.svg?style=for-the-badge&logo=kubernetes&logoColor=white" alt="kubernetes">
 <img src="https://img.shields.io/badge/helm-0db7ed?style=for-the-badge&logo=helm&logoColor=white" alt="Helm">
 <img src="https://img.shields.io/badge/shell_script-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white" alt="shell">
 <a href="https://www.linkedin.com/in/maximiliano-gregorio-pizarro-consultor-it"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="linkedin" /></a>
 <a href="https://artifacthub.io/packages/search?repo=workshop-pipelines"><img src="https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/workshop-pipelines" alt="Artifact Hub" /></a>
-</p>
+</div>
 
-<p align="left">
-<img src="https://maximilianopizarro.github.io/workshop-pipelines/ocp-pipelines.png" width="900" title="Run On Openshift">  
-</p>
+![OpenShift Pipelines]({{ site.baseurl }}/ocp-pipelines.png)
 
-
-<p align="left">
-<img src="https://maximilianopizarro.github.io/workshop-pipelines/ecommerce-architect.png" width="900" title="Run On Openshift">
-</p>
+![E-commerce Architecture]({{ site.baseurl }}/ecommerce-architect.png)
 
 # Getting Started: Fork and Personalize Your Environment
 
@@ -146,15 +148,11 @@ Each task is modular and can be run independently or in sequence, allowing you t
 
 View the OpenShift Topology.
 
-<p align="left">  
-<img src="https://maximilianopizarro.github.io/workshop-pipelines/workshop-pipelines-topology.PNG" width="900" title="Run On Openshift">
-</p>
+![OpenShift Topology]({{ site.baseurl }}/workshop-pipelines-topology.PNG)
 
 Access the Web App Home Page.
 
-<p align="left">  
-<img src="https://maximilianopizarro.github.io/workshop-pipelines/workshop-pipelines-home.PNG" width="900" title="Run On Openshift">  
-</p>
+![Workshop Pipelines Home]({{ site.baseurl }}/workshop-pipelines-home.PNG)
 
 Get the Web App route with the following command:
 
@@ -173,9 +171,7 @@ workshop-pipelines   workshop-pipelines-maximilianopizarro5-dev.apps.rm2.thpm.p1
 
 Access the WebHook settings and configure the `ci-github` route.
 
-<p align="left">
-<img src="https://maximilianopizarro.github.io/workshop-pipelines/webhook-github.PNG" width="900" title="Run On Openshift">  
-</p>
+![GitHub Webhook Configuration]({{ site.baseurl }}/webhook-github.PNG)
 
 ```bash
 oc get routes ci-github
@@ -207,9 +203,7 @@ The pipeline includes a `promote-to-quay` task that copies images from the OpenS
    - **Description**: Optional description for your repository
 4. Click **Create Public Repository** (or **Create Private Repository**)
 
-<p align="left">
-<img src="https://maximilianopizarro.github.io/workshop-pipelines/quay-1.png" width="900" title="Create Quay.io Repository">  
-</p>
+![Create Quay.io Repository]({{ site.baseurl }}/quay-1.png)
 
 ## Step 2: Create a Robot Account in Quay.io
 
@@ -221,9 +215,7 @@ A robot account is a special type of account designed for automated access to Qu
 4. Enter a name for the robot account (e.g., `workshop-pipelines`)
 5. Click **Create Robot Account**
 
-<p align="left">
-<img src="https://maximilianopizarro.github.io/workshop-pipelines/quay-2.png" width="900" title="Create Robot Account">  
-</p>
+![Create Robot Account]({{ site.baseurl }}/quay-2.png)
 
 ## Step 3: Grant Permissions to the Robot Account
 
@@ -234,9 +226,7 @@ A robot account is a special type of account designed for automated access to Qu
 5. Set the permission level to **Write** (this allows the robot to push images)
 6. Click **Add Permission**
 
-<p align="left">
-<img src="https://maximilianopizarro.github.io/workshop-pipelines/quay-3.png" width="900" title="Grant Robot Account Permissions">  
-</p>
+![Grant Robot Account Permissions]({{ site.baseurl }}/quay-3.png)
 
 ## Step 4: Get Robot Account Credentials
 
@@ -312,24 +302,20 @@ The task runs after the `s2i-binary-build` task completes successfully, ensuring
 # Install Developer Hub with Helm CLI (Optional)
 
 See the pipelines.
-<p align="left">
-<img src="https://maximilianopizarro.github.io/workshop-pipelines/developer-hub-ecommerce.PNG" width="900" title="Run On Openshift">  
-</p>
+
+![Developer Hub E-commerce]({{ site.baseurl }}/developer-hub-ecommerce.PNG)
 
 Review the documentation.
-<p align="left">
-<img src="https://maximilianopizarro.github.io/workshop-pipelines/developer-hub-ecommerce-documentation.PNG" width="900" title="Run On Openshift">  
-</p>
+
+![Developer Hub Documentation]({{ site.baseurl }}/developer-hub-ecommerce-documentation.PNG)
 
 See the App Topology.
-<p align="left">
-<img src="https://maximilianopizarro.github.io/workshop-pipelines/developer-hub-ecommerce-kubernetes.PNG" width="900" title="Run On Openshift">  
-</p>
+
+![Developer Hub Kubernetes]({{ site.baseurl }}/developer-hub-ecommerce-kubernetes.PNG)
 
 See the Web App Logs.
-<p align="left">
-<img src="https://maximilianopizarro.github.io/workshop-pipelines/developer-hub-ecommerce-kubernetes-logs.PNG" width="900" title="Run On Openshift">  
-</p>
+
+![Developer Hub Logs]({{ site.baseurl }}/developer-hub-ecommerce-kubernetes-logs.PNG)
 
 
 
@@ -401,7 +387,7 @@ https://github.com/maximilianoPizarro/workshop-pipelines/blob/main/catalog-info.
 ## Add repository
 
 ```bash
-helm repo add workshop-pipelines https://maximilianopizarro.github.io/workshop-pipelines/
+helm repo add workshop-pipelines {{ site.url }}{{ site.baseurl }}/
 ```
 
 ## Install Chart with parameters
@@ -423,7 +409,7 @@ helm uninstall workshop-pipelines
 
 # Links
 
-- [Home Page](https://maximilianopizarro.github.io/workshop-pipelines/)
+- [Home Page]({{ site.url }}{{ site.baseurl }}/)
 - [GitHub Repo](https://github.com/maximilianoPizarro/workshop-pipelines)
 
 
