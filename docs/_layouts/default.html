@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
     <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+    <link rel="icon" type="image/x-icon" href="{{ site.baseurl }}/favicon.ico">
     
     <!-- Red Hat Design System CSS -->
     <link rel="stylesheet" href="https://unpkg.com/@redhat/ux-red-hat-design-system@4.0.0/dist/css/rhds.min.css">
@@ -22,8 +23,8 @@
         body {
             font-family: 'Red Hat Text', 'Overpass', 'Overpass', 'Helvetica Neue', Helvetica, Arial, sans-serif;
             line-height: 1.6;
-            color: #151515;
-            background-color: #ffffff;
+            color: #e0e0e0;
+            background-color: #1a1a1a;
         }
         
         .rh-site-header {
@@ -108,7 +109,8 @@
         }
         
         .rh-content {
-            background: #ffffff;
+            background: #1a1a1a;
+            color: #e0e0e0;
         }
         
         .rh-content h1 {
@@ -123,7 +125,7 @@
         }
         
         .rh-content h2 {
-            color: #151515;
+            color: #ffffff;
             font-size: 1.5rem;
             font-weight: 600;
             margin-top: 2rem;
@@ -132,7 +134,7 @@
         }
         
         .rh-content h3 {
-            color: #151515;
+            color: #ffffff;
             font-size: 1.25rem;
             font-weight: 600;
             margin-top: 1.5rem;
@@ -141,7 +143,8 @@
         }
         
         .rh-content code {
-            background-color: #f5f5f5;
+            background-color: #2d2d2d;
+            color: #e0e0e0;
             padding: 0.2em 0.4em;
             border-radius: 3px;
             font-family: 'Red Hat Mono', 'Overpass Mono', monospace;
@@ -167,9 +170,9 @@
             max-width: 100%;
             height: auto;
             border-radius: 4px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
             margin: 1.5rem 0;
-            border: 1px solid #e0e0e0;
+            border: 1px solid #404040;
         }
         
         .rh-content img[alt*="badge"] {
@@ -179,11 +182,12 @@
         }
         
         .rh-content a {
-            color: var(--rh-color-brand-red-on-white);
+            color: var(--rh-color-brand-red-on-dark);
             text-decoration: none;
         }
         
         .rh-content a:hover {
+            color: var(--rh-color-brand-red-on-white);
             text-decoration: underline;
         }
         
@@ -202,17 +206,17 @@
         }
         
         .rh-card {
-            background: #ffffff;
-            border: 1px solid #e0e0e0;
+            background: #2d2d2d;
+            border: 1px solid #404040;
             border-radius: 8px;
             padding: 1.5rem;
             margin: 1.5rem 0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
             transition: box-shadow 0.2s ease;
         }
         
         .rh-card:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
         }
         
         .rh-card__title {
@@ -236,7 +240,7 @@
             border-left: 4px solid var(--rh-color-brand-red-on-white);
             padding-left: 1rem;
             margin: 1.5rem 0;
-            color: #666;
+            color: #b0b0b0;
             font-style: italic;
         }
         

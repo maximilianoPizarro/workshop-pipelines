@@ -16,8 +16,6 @@ hero:
 <a href="https://artifacthub.io/packages/search?repo=workshop-pipelines"><img src="https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/workshop-pipelines" alt="Artifact Hub" /></a>
 </div>
 
-![OpenShift Pipelines]({{ site.baseurl }}/ocp-pipelines.png)
-
 ![E-commerce Architecture]({{ site.baseurl }}/ecommerce-architect.png)
 
 # Getting Started: Fork and Personalize Your Environment
