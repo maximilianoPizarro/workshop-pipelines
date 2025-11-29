@@ -26,7 +26,7 @@ exclude:
   - .git
   - .gitignore
   - README.md
-  - *.tgz
+  - "*.tgz"
   - index.yaml
 
 # Red Hat Design System configuration
